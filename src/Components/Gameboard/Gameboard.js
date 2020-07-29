@@ -42,7 +42,8 @@ const Gameboard = () => {
     if (shipCells.some(el => occupied.includes(el))) return false; 
     return true;
   }
-   
+  
+  // need to add functionality to prevent already placed ship from being placed again
   const placeShip = (type, startingPoint, orientation) => {
     if (!validate(ships[type].length, startingPoint, orientation)) return null;
 
@@ -59,14 +60,19 @@ const Gameboard = () => {
         cells[i] = type[0].toUpperCase();
       }
     }
-    console.log(cells)
+  }
+
+  const allShipsPlaced = () => {
+    // when all ships are placed, they'll take up 17 places on the board
+    return cells.filter(val => typeof val !== 'number').length === 17;
   }
 
   return {
     ships,
     cells,
     validate,
-    placeShip
+    placeShip,
+    allShipsPlaced
   };
 }
 

@@ -44,13 +44,29 @@ const Gameboard = () => {
   }
    
   const placeShip = (type, startingPoint, orientation) => {
-  
+    if (!validate(ships[type].length, startingPoint, orientation)) return null;
+
+    if (orientation === 'h') {
+      const endPoint = startingPoint + ships[type].length - 1;
+      for (let i = startingPoint; i <= endPoint; ++i) {
+        occupied.push(i); // add cells taken up by ship to list of occupied cells
+        cells[i] = type[0].toUpperCase(); 
+      }
+    } else if (orientation === 'v') {
+      const endPoint = startingPoint + (ships[type].length - 1) * 10;
+      for (let i = startingPoint; i <= endPoint; i += 10) {
+        occupied.push(i);
+        cells[i] = type[0].toUpperCase();
+      }
+    }
+    console.log(cells)
   }
 
   return {
     ships,
     cells,
-    validate
+    validate,
+    placeShip
   };
 }
 

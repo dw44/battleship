@@ -27,3 +27,11 @@ test('validate function works properly', () => {
   expect(board.validate(3, 0, 'h')).toBeTruthy();
   expect(board.validate(4, 44, 'h')).toBeTruthy();
 });
+
+test('place function places ships on proper positions', () => {
+  const board = Gameboard();
+  board.placeShip('battleship', 60, 'v');
+  expect([board.cells[60], board.cells[70], board.cells[80], board.cells[90]]).toEqual(['B', 'B', 'B', 'B']);
+  board.placeShip('carrier', 71, 'h');
+  expect(board.cells[71]).toBe('C');
+}); 

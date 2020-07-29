@@ -28,11 +28,23 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.grid {
+  height: 400px;
+  width: 400px;
+  margin: 60px auto;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.grid > div {
+  background-color: #61dafb;
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.grid > div:hover {
+  background-color: #50aacc;
+  font-weight: 800;
 }

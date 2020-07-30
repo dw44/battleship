@@ -1,4 +1,4 @@
-function Ship(length) {
+const Ship = (length) => {
   // a ship needs to be between 2 and 5 units long
   if (length < 2 || length > 5) return null;
   // hitbox initialized as array of size equal to length, with all values set to false at first

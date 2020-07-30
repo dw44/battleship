@@ -88,6 +88,10 @@ const Gameboard = () => {
     }
   }
 
+  const allShipsSunk = () => {
+    return hitAttacks.length === 17;
+  }
+
   return {
     ships,
     cells,
@@ -97,7 +101,8 @@ const Gameboard = () => {
     attacked,
     missedAttacks,
     hitAttacks,
-    receivedAttack
+    receivedAttack,
+    allShipsSunk
   };
 }
 
@@ -105,7 +110,7 @@ export default Gameboard;
 
 
 /*
-1 - Note that we have not yet created any User Interface. We should know our code is coming together by running the tests. You shouldn’t be relying on console.logs or DOM methods to make sure your code is doing what you expect it to. 
+1 - Note that we have not yet created any User Interface. We should know our code is coming together by running the tests. You shouldn’t be relying on console.logs or DOM methods to make sure your code is doing what you expect it to. ✓
 
 2 - Gameboards should be able to place ships at specific coordinates by calling the ship factory function ✓
 

@@ -68,4 +68,8 @@ test('attacking position on board triggers attack in ship object', () => {
   board.receivedAttack(44);
   board.receivedAttack(46);
   expect(board.ships['D'].hitBox).toEqual([true, false, true]);
+  board.receivedAttack(20);
+  board.receivedAttack(30);
+  board.receivedAttack(60);
+  expect(board.ships['C'].hitBox).toEqual([true, true, false, false, true]);
 });

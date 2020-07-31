@@ -86,6 +86,8 @@ const Gameboard = () => {
       const index = ships[type].positionOnBoard.indexOf(position); 
       ships[type].hit(index);
     }
+    // TO BE REMOVED
+    console.log(position);
   }
 
   const allShipsSunk = () => {

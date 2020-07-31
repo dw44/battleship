@@ -36,8 +36,7 @@
   grid-template-columns: repeat(10, 1fr);
 }
 
-.grid > div {
-  background-color: #61dafb;
+.cell {
   box-sizing: border-box;
   border: 1px solid black;
   padding: 10px;
@@ -47,4 +46,8 @@
 .grid > div:hover {
   background-color: #50aacc;
   font-weight: 800;
+}
+
+.shipCell {
+  background-color: tomato;
 }

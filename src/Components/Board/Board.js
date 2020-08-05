@@ -11,8 +11,6 @@ const Board = (props) => {
 
   // experimental (context shit)
   const active = useContext(ActivePlayerContext);
-  
-  // experiment ends here
 
   // populate grid for player board
   const grid = props.player.cells.map((cell, index) => {
@@ -50,5 +48,5 @@ TODO:
 
 NOTES:
 - State not needed for gameOver. Just use allShipsSunk() method directly from board object.
-- Try using context to keep track of active player
+- Try using context to keep track of active player - woohoo. working.
 */

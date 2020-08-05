@@ -20,7 +20,7 @@ const App = () => {
     <ActiveContextProvider>
       <div className="App">
         <TurnDisplay />
-        <div className="GridContainer">
+        <section className="GridContainer">
           <Board 
             player={human}
             name="Player" 
@@ -31,7 +31,7 @@ const App = () => {
             name="Computer"
             gameOver={() => handleGameOver('Player')} 
           />
-        </div>
+        </section>
       </div>
     </ActiveContextProvider>
   );

@@ -1,30 +1,25 @@
-import React, { createContext, Component } from 'react';
+import React, { createContext, Component, useState } from 'react';
 
 export const ActivePlayerContext = createContext();
 
-class ActiveContextProvider extends Component {
-  state = {
+const ActiveContextProvider = props => {
+  const [active, switchActive] = useState({
     Player: true,
     Computer: false,
-  }
+  });
 
-  toggleActivePlayer = () => {
-    this.setState(prevState => {
-      return {
-      Player: !prevState.Player,
-      Computer: !prevState.Computer,
-      }
+  const toggleActive = () => {
+    switchActive({
+      Player: !active.Player,
+      Computer: !active.Computer,
     });
-    console.log(this.state);
   }
 
-  render() {
-    return (
-      <ActivePlayerContext.Provider value={{...this.state, toggleActive: this.toggleActivePlayer}}>
-        {this.props.children}
-      </ActivePlayerContext.Provider>
-    );
-  }
+  return (
+    <ActivePlayerContext.Provider value={{...active, toggleActive: toggleActive}}>
+      {props.children}
+    </ActivePlayerContext.Provider>
+  );
 }
 
 export default ActiveContextProvider;

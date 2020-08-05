@@ -1,6 +1,9 @@
 import React from 'react';
 import Gameboard from './Logic/Gameboard/Gameboard'; 
+
 import Board from './Components/Board/Board';
+import TurnDisplay from './Components/TurnDisplay/TurnDisplay';
+
 import ActiveContextProvider from './Contexts/ActivePlayerContext';
 import './App.css';
 
@@ -14,20 +17,23 @@ const App = () => {
   }
 
   return ( 
-    <div className="App">
-      <ActiveContextProvider>
-        <Board 
-          player={human}
-          name="Player" 
-          gameOver={() => handleGameOver('Computer')} 
-        />
-        <Board 
-          player={computer} 
-          name="Computer"
-          gameOver={() => handleGameOver('Player')} 
-        />
-      </ActiveContextProvider>
-    </div>
+    <ActiveContextProvider>
+      <div className="App">
+        <TurnDisplay />
+        <div className="GridContainer">
+          <Board 
+            player={human}
+            name="Player" 
+            gameOver={() => handleGameOver('Computer')} 
+          />
+          <Board 
+            player={computer} 
+            name="Computer"
+            gameOver={() => handleGameOver('Player')} 
+          />
+        </div>
+      </div>
+    </ActiveContextProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { ActivePlayerContext } from '../../Contexts/ActivePlayerContext';
 import { v4 as uuid } from 'uuid';
 import classes from './Board.module.css';
@@ -29,7 +29,7 @@ const Board = (props) => {
   const handleClick = index => {
     if (!props.player.attacked.includes(index)) {
       props.player.receivedAttack(index);
-      console.log(props.player.attacked);
+      console.log(`${props.name}: ${JSON.stringify(props.player.attacked)}`);
       active.toggleActive();
       if (props.player.allShipsSunk()) props.gameOver();
     }    

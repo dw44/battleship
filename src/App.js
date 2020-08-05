@@ -21,7 +21,6 @@ const App = () => {
           name="Player" 
           gameOver={() => handleGameOver('Computer')} 
         />
-
         <Board 
           player={computer} 
           name="Computer"

@@ -4,22 +4,23 @@ export const ActivePlayerContext = createContext();
 
 class ActiveContextProvider extends Component {
   state = {
-    player: true,
-    computer: false,
+    Player: true,
+    Computer: false,
   }
 
   toggleActivePlayer = () => {
     this.setState(prevState => {
       return {
-      player: !prevState.player,
-      computer: !prevState.computer,
+      Player: !prevState.Player,
+      Computer: !prevState.Computer,
       }
     });
+    console.log(this.state);
   }
 
   render() {
     return (
-      <ActivePlayerContext.Provider value={{...this.state}}>
+      <ActivePlayerContext.Provider value={{...this.state, toggleActive: this.toggleActivePlayer}}>
         {this.props.children}
       </ActivePlayerContext.Provider>
     );

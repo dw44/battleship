@@ -1,5 +1,6 @@
-import React from 'react';
-import {v4 as uuid} from 'uuid';
+import React, { useContext, useState } from 'react';
+import { ActivePlayerContext } from '../../Contexts/ActivePlayerContext';
+import { v4 as uuid } from 'uuid';
 import classes from './Board.module.css';
 
 
@@ -8,6 +9,11 @@ const Board = (props) => {
   const types = ['C','B','D','S','P'];
   types.forEach(ship => props.player.placeShip(ship, types.indexOf(ship), 'v'));
 
+  // experimental (context shit)
+  const active = useContext(ActivePlayerContext);
+  
+  // experiment ends here
+
   // populate grid for player board
   const grid = props.player.cells.map((cell, index) => {
     return (
@@ -15,7 +21,7 @@ const Board = (props) => {
         className={ typeof cell === 'string' ? 
           [classes.Cell, classes.Ship].join(' ') : classes.Cell }
         key={uuid()}
-        onClick={() => handleClick(index)}
+        onClick={active[props.name] ? () => handleClick(index) : null}
       >{cell}</div>
     );
   });
@@ -23,7 +29,8 @@ const Board = (props) => {
   const handleClick = index => {
     if (!props.player.attacked.includes(index)) {
       props.player.receivedAttack(index);
-      console.log(props.player.attacked)
+      console.log(props.player.attacked);
+      active.toggleActive();
       if (props.player.allShipsSunk()) props.gameOver();
     }    
   }

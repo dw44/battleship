@@ -1,0 +1,28 @@
+.Board {
+  margin: 20px auto;
+  width: 500px;
+  height: 500px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.Cell {
+  border: 1px solid #000;
+  background-color: #61dafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.Ship {
+  background-color: #41B883;
+}
+
+.Cell:Hover {
+  opacity: 0.5;
+}
+
+.Attacked {
+  background-color: #f90;
+}

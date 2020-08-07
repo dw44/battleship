@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ActivePlayerContext } from '../../Contexts/ActivePlayerContext';
+import { GameContext } from '../../Contexts/GameContext';
 import { v4 as uuid } from 'uuid';
 import classes from './Board.module.css';
 
@@ -10,7 +10,7 @@ const Board = (props) => {
   types.forEach(ship => props.player.placeShip(ship, types.indexOf(ship), 'v'));
 
   // experimental (context shit)
-  const active = useContext(ActivePlayerContext);
+  const active = useContext(GameContext);
 
   // populate grid for player board
   const grid = props.player.cells.map((cell, index) => {
@@ -19,8 +19,11 @@ const Board = (props) => {
         className={ typeof cell === 'string' ? 
           [classes.Cell, classes.Ship].join(' ') : classes.Cell }
         key={uuid()}
-        onClick={active[props.name] ? () => handleClick(index) : null}
-      >{cell}</div>
+        // Player board clickable when computer is active and vice versa
+        onClick={active[props.name] === false ? () => handleClick(index) : null}
+      >
+        {cell}
+      </div>
     );
   });
 
@@ -29,9 +32,16 @@ const Board = (props) => {
       props.player.receivedAttack(index);
       console.log(`${props.name}: ${JSON.stringify(props.player.attacked)}`);
       active.toggleActive();
-      if (props.player.allShipsSunk()) props.gameOver();
+      if (props.player.allShipsSunk()) {
+        active.defaultActive();
+        props.gameOver();
+      }
     }    
   }
+
+  // if (props.name === 'Player' && active.Computer) {
+  //   alert('Comp Active');
+  // }
 
   return (
     <div className={classes.Board}>
@@ -45,6 +55,7 @@ export default Board;
 /*
 TODO:
 - Add dynamic classes so attacked cells get .Attacked class from CSS modules.
+- Automate computer turns. Computer attacks player's board when active.Computer is true.
 
 NOTES:
 - State not needed for gameOver. Just use allShipsSunk() method directly from board object.

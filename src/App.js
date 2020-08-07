@@ -4,20 +4,18 @@ import Gameboard from './Logic/Gameboard/Gameboard';
 import Board from './Components/Board/Board';
 import TurnDisplay from './Components/TurnDisplay/TurnDisplay';
 
-import ActiveContextProvider from './Contexts/ActivePlayerContext';
+import GameContextProvider from './Contexts/GameContext';
 import './App.css';
 
-// Do NOT use state in App()
-
 const App = () => {
-  let [human, computer] = [Gameboard(), Gameboard()];
-  
+  const [human, computer] = [Gameboard(), Gameboard()];
+
   const handleGameOver = (name) => {
     alert(`Game Over. ${name} Wins!!!`);
   }
 
   return ( 
-    <ActiveContextProvider>
+    <GameContextProvider>
       <div className="App">
         <TurnDisplay />
         <section className="GridContainer">
@@ -33,7 +31,7 @@ const App = () => {
           />
         </section>
       </div>
-    </ActiveContextProvider>
+    </GameContextProvider>
   );
 }
 

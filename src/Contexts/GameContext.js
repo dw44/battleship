@@ -11,8 +11,8 @@ const GameContextProvider = props => {
   const setDefaultActive = () => {
     switchActive(() => {
       return {
-        Player: false,
-        Computer: true,
+        Player: true,
+        Computer: false,
       }
     });
   }

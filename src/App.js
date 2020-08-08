@@ -13,7 +13,7 @@ const App = () => {
   const handleGameOver = (name) => {
     alert(`Game Over. ${name} Wins!!!`);
   }
-
+  
   return ( 
     <GameContextProvider>
       <div className="App">
@@ -22,11 +22,11 @@ const App = () => {
           <Board 
             player={human}
             name="Player" 
-            gameOver={() => handleGameOver('Computer')} 
+            gameOver={() => handleGameOver('Computer')}
           />
           <Board 
             player={computer} 
-            name="Computer"
+            name="Computer" 
             gameOver={() => handleGameOver('Player')} 
           />
         </section>

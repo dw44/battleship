@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { GameContext } from '../../Contexts/GameContext';
 import { v4 as uuid } from 'uuid';
 import classes from './Board.module.css';
@@ -19,15 +19,23 @@ const Board = (props) => {
         className={ typeof cell === 'string' ? 
           [classes.Cell, classes.Ship].join(' ') : classes.Cell }
         key={uuid()}
-        // Player board clickable when computer is active and vice versa
-        onClick={active[props.name] === false ? () => handleClick(index) : null}
-      >
-        {cell}
-      </div>
+        id={`${props.name}-${index}`}
+        onClick={active[props.name] === false ? () => handlePlayerTurn(index) : null}
+      >{cell}</div>
     );
   });
 
-  const handleClick = index => {
+  useEffect(() => {
+    const cells = [...new Array(100)].map((_, index) => index).filter(val => !props.player.attacked.includes(val));
+    if (active.Computer && props.name === 'Player') {
+      setTimeout(() => {
+        const index = Math.floor(Math.random() * cells.length);
+        handlePlayerTurn(index);
+      }, 1000);
+    }
+  });
+
+  const handlePlayerTurn = index => {
     if (!props.player.attacked.includes(index)) {
       props.player.receivedAttack(index);
       console.log(`${props.name}: ${JSON.stringify(props.player.attacked)}`);
@@ -38,10 +46,6 @@ const Board = (props) => {
       }
     }    
   }
-
-  // if (props.name === 'Player' && active.Computer) {
-  //   alert('Comp Active');
-  // }
 
   return (
     <div className={classes.Board}>

@@ -20,7 +20,7 @@ const Board = (props) => {
           [classes.Cell, classes.Ship].join(' ') : classes.Cell }
         key={uuid()}
         id={`${props.name}-${index}`}
-        onClick={active[props.name] === false ? () => handlePlayerTurn(index) : null}
+        onClick={active.Player && props.name === 'Computer' ? () => handlePlayerTurn(index) : null}
       >{cell}</div>
     );
   });

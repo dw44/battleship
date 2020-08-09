@@ -19,23 +19,24 @@ const Board = (props) => {
         className={ typeof cell === 'string' ? 
           [classes.Cell, classes.Ship].join(' ') : classes.Cell }
         key={uuid()}
-        id={`${props.name}-${index}`}
-        onClick={active.Player && props.name === 'Computer' ? () => handlePlayerTurn(index) : null}
+        onClick={active.Player && props.name === 'Computer' ? () => handleTurn(index) : null}
       >{cell}</div>
     );
   });
 
   useEffect(() => {
-    const cells = [...new Array(100)].map((_, index) => index).filter(val => !props.player.attacked.includes(val));
     if (active.Computer && props.name === 'Player') {
-      setTimeout(() => {
-        const index = Math.floor(Math.random() * cells.length);
-        handlePlayerTurn(index);
+      let index = 0;
+      do {
+        index = Math.floor(Math.random() * 100);
+      } while(props.player.attacked.includes(index));
+        setTimeout(() => {
+          handleTurn(index);
       }, 1000);
     }
   });
 
-  const handlePlayerTurn = index => {
+  const handleTurn = index => {
     if (!props.player.attacked.includes(index)) {
       props.player.receivedAttack(index);
       console.log(`${props.name}: ${JSON.stringify(props.player.attacked)}`);
@@ -59,7 +60,6 @@ export default Board;
 /*
 TODO:
 - Add dynamic classes so attacked cells get .Attacked class from CSS modules.
-- Automate computer turns. Computer attacks player's board when active.Computer is true.
 
 NOTES:
 - State not needed for gameOver. Just use allShipsSunk() method directly from board object.
